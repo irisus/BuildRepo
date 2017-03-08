@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="js/angujar.min.js"></script>
+</head>
+<body>
+    <script>
+        var app = angular.module("DShoppingList", []);
+        //Agregamos un array que contendra la lista de articulos para comprar
+        app.controller("myList", function ($scope) {
+            //CONTROLLER PRODUCTS
+            $scope.products = ["sale1", "sale2", "sale3"];
+            $scope.addItem = function (x) {
+                $scope.products.push(x);
+            }
+            $scope.RemoveItem = function (x) {
+
+                $scope.products.splice(x, 1);
+                //$scope.BuyItem(x);
+            }
+
+
+            //CONTROLLER PRODUCTSTOSALE
+            $scope.productsToSale = ["prod1", "prod2", "prod3"];
+            $scope.addItemSaled = function (x) {
+                //window.alert(x);
+                $scope.products.push(x);
+            }
+            //tachar el elemento pero en esta version de angular no es compatible 
+            $scope.BuyItem = function (x) {
+                x.striked = true;
+            }
+         
+           
+
+        });
+    </script>
+
+    <div ng-app="DShoppingList" ng-controller="myList">
+        <h1>lista de productos para comprar</h1>
+      <ul>
+          <li ng-repeat="x in productsToSale" ng-model="NewItem" ng-click="addItemSaled(x)">{{x}}</li>
+      </ul>
+        <!--<input type="text" id="txtProducto" ng-model="NewItem" />
+        <button ng-click="addItem()">Add Product</button>-->
+        <h2>lista de productos comprados</h2>
+        <ul>
+               <!--repita" por cada item X en el array de productos-->
+            <li ng-repeat="x in products" ng-click=" RemoveItem($index); $event.stopPropagation();" >{{x}}</li>
+        </ul>
+    </div>
+
+</body>
+</html>
